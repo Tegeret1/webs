@@ -1,0 +1,15 @@
+RewriteEngine On
+
+# Preserve direct access to existing files/directories.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Home route.
+RewriteRule ^$ index.php?page=index [QSA,L]
+
+# Clean routes.
+RewriteRule ^(about|services|pricing|team|gallery|blog|contact)/?$ index.php?page=$1 [QSA,L]
+
+# Fallback for unknown pages.
+RewriteRule ^(.+)$ index.php?page=$1 [QSA,L]
